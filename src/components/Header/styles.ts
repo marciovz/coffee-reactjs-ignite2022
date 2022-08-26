@@ -1,4 +1,4 @@
-import styled  from 'styled-components'
+import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
   max-width: 70rem;
@@ -18,16 +18,16 @@ export const HeaderContainer = styled.header`
       font-size: 0.875rem;
       line-height: 1.3rem;
       align-items: center;
-      color: ${props => props.theme['purple-dark']};
-      background: ${props => props.theme['purple-light']};
+      color: ${(props) => props.theme['purple-dark']};
+      background: ${(props) => props.theme['purple-light']};
       border-radius: 6px;
       transition: background 2s;
     }
 
     a {
       padding: 0.5rem;
-      color: ${props => props.theme['yellow-dark']};
-      background: ${props => props.theme['yellow-light']};
+      color: ${(props) => props.theme['yellow-dark']};
+      background: ${(props) => props.theme['yellow-light']};
       border-radius: 6px;
     }
   }
