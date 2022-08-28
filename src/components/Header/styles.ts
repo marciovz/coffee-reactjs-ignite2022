@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
-  max-width: 70rem;
-  margin: 0 auto;
   padding: 2rem 0;
   display: flex;
   justify-content: space-between;
+
+  > a {
+    line-height: 0;
+  }
 
   nav {
     display: flex;
@@ -26,6 +28,7 @@ export const HeaderContainer = styled.header`
 
     a {
       padding: 0.5rem;
+      line-height: 0;
       color: ${(props) => props.theme['yellow-dark']};
       background: ${(props) => props.theme['yellow-light']};
       border-radius: 6px;
