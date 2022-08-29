@@ -12,11 +12,11 @@ export const defaultTheme = {
   'base-text': '#574f4d',
   'base-label': '#8d8686',
 
-  'purple-dark': '#4b2995',
   purple: '#8047f8',
+  'purple-dark': '#4b2995',
   'purple-light': '#ebe5f9',
 
-  'yellow-dark': '#c47f17',
   yellow: '#dbac2c',
+  'yellow-dark': '#c47f17',
   'yellow-light': '#f1e9c9',
 }
