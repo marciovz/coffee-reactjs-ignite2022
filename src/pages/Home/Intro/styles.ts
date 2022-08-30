@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import backgroundIntro from '../../assets/background-intro.svg'
+import backgroundIntro from '../../../assets/background-intro.svg'
 
 export const IntroContainer = styled.div`
   width: 100%;

@@ -1,6 +1,6 @@
 import { ShoppingCart, Timer, Package, Coffee } from 'phosphor-react'
 
-import imgIntro from '../../assets/img-intro.svg'
+import imgIntro from '../../../assets/img-intro.svg'
 
 import {
   IntroContainer,
