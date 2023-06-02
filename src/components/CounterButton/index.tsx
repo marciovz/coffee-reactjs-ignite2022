@@ -1,5 +1,5 @@
-import { Plus, Minus } from 'phosphor-react'
 import { useState } from 'react'
+import { Plus, Minus } from 'phosphor-react'
 
 import { ButtonContainer } from './styles'
 
@@ -36,12 +36,12 @@ export function CounterButton({
 
   return (
     <ButtonContainer>
-      <button onClick={increaseValue}>
-        <Plus size={14} weight="bold" />
-      </button>
-      <span>{value}</span>
       <button onClick={decreaseValue}>
         <Minus size={14} weight="bold" />
+      </button>
+      <span>{value}</span>
+      <button onClick={increaseValue}>
+        <Plus size={14} weight="bold" />
       </button>
     </ButtonContainer>
   )
