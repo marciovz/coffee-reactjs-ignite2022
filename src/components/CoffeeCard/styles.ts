@@ -18,15 +18,15 @@ export const CardContainer = styled.div`
 
   h3 {
     margin-top: 1rem;
-    font-family: 'Baloo 2', cursive;
+    font: ${({ theme }) => theme.fonts['baloo-700']};
     font-size: 1.25rem;
-    font-weight: 700;
     line-height: 1.625rem;
     color: ${({ theme }) => theme.colors['base-subtitle']};
   }
 
   > p {
     margin-top: 0.5rem;
+    font: ${({ theme }) => theme.fonts['roboto-400']};
     font-size: 0.875rem;
     line-height: 1.1375rem;
     text-align: center;
@@ -41,19 +41,18 @@ export const TagContainer = styled.div`
 
   span {
     padding: 0.25rem 0.5rem;
+    font: ${({ theme }) => theme.fonts['roboto-700']};
     font-size: 0.625rem;
-    font-weight: 700;
     line-height: 0.8125rem;
     text-transform: uppercase;
-    background: ${({ theme }) => theme.colors['yellow-light']};
     color: ${({ theme }) => theme.colors['yellow-dark']};
+    background: ${({ theme }) => theme.colors['yellow-light']};
 
     border-radius: 1rem;
   }
 `
 
 export const BuyContainer = styled.div`
-  border: 1px solid green;
   width: 100%;
   margin-top: 2.0625rem;
 
@@ -62,7 +61,7 @@ export const BuyContainer = styled.div`
   align-items: center;
 
   p {
-    font-family: 'Baloo 2', cursive;
+    font: ${({ theme }) => theme.fonts['baloo-800']};
     font-size: 1.5rem;
     font-weight: 800;
     line-height: 1.95rem;
@@ -70,8 +69,7 @@ export const BuyContainer = styled.div`
 
     span {
       margin-right: 4px;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
+      font: ${({ theme }) => theme.fonts['roboto-400']};
       font-size: 0.875rem;
       line-height: 1.1375rem;
     }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { AddCartButton } from '../../../components/AddCartButton'
-import { CounterButton } from '../../../components/CounterButton'
+import { AddCartButton } from '../AddCartButton'
+import { CounterButton } from '../CounterButton'
 import { CardContainer, TagContainer, BuyContainer } from './styles'
 
 interface ICoffee {
@@ -12,31 +12,27 @@ interface ICoffee {
   image: string
 }
 
-interface IShoppingCartItem {
+interface IAddToCartParams {
   id: string
   quantity: number
 }
 
 interface ICoffeeCardProps {
   coffee: ICoffee
-  onSubmitToShoppingCart: (shoppingCartItem: IShoppingCartItem) => void
+  onAddToCart: (addToCartParams: IAddToCartParams) => void
 }
 
-export function CoffeeCard({
-  coffee,
-  onSubmitToShoppingCart,
-}: ICoffeeCardProps) {
+export function CoffeeCard({ coffee, onAddToCart }: ICoffeeCardProps) {
   const [quantity, setQuantity] = useState(0)
 
   const handleNewQuantity = (value: number) => {
-    console.log(value)
     setQuantity(value)
   }
 
   const handleAddToCart = () => {
     if (quantity <= 0) return
 
-    onSubmitToShoppingCart({
+    onAddToCart({
       id: coffee.id,
       quantity,
     })
