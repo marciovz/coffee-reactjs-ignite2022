@@ -2,17 +2,12 @@ import { ShoppingCart, Timer, Package, Coffee } from 'phosphor-react'
 
 import imgIntro from '../../../assets/img-intro.svg'
 
-import {
-  IntroContainer,
-  IntroContent,
-  IntroItemColumns,
-  IntroItem,
-} from './styles'
+import { Container, Content, ItemColumns, Item } from './styles'
 
 export function Intro() {
   return (
-    <IntroContainer>
-      <IntroContent>
+    <Container>
+      <Content>
         <section>
           <h1>Encontre o café perfeito para qualquer hora do dia</h1>
           <h2>
@@ -20,34 +15,34 @@ export function Intro() {
             hora
           </h2>
 
-          <IntroItemColumns>
+          <ItemColumns>
             <div>
-              <IntroItem statusColor="yellowDark">
+              <Item statusColor="yellowDark">
                 <ShoppingCart size={32} weight="fill" />
                 <p>Compra simples e segura</p>
-              </IntroItem>
-              <IntroItem statusColor="yellow">
+              </Item>
+              <Item statusColor="yellow">
                 <Timer size={32} weight="fill" />
                 <p>Entrega rápida e rastreada</p>
-              </IntroItem>
+              </Item>
             </div>
             <div>
-              <IntroItem statusColor="grayDark">
+              <Item statusColor="grayDark">
                 <Package size={32} weight="fill" />
                 <p>Embalagem mantém o café intacto</p>
-              </IntroItem>
-              <IntroItem statusColor="purple">
+              </Item>
+              <Item statusColor="purple">
                 <Coffee size={32} weight="fill" />
                 <p>O café chega fresquinho até você</p>
-              </IntroItem>
+              </Item>
             </div>
-          </IntroItemColumns>
+          </ItemColumns>
         </section>
 
         <section>
           <img src={imgIntro} alt="" />
         </section>
-      </IntroContent>
-    </IntroContainer>
+      </Content>
+    </Container>
   )
 }

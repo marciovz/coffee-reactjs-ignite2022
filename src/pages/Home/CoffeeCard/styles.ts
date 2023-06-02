@@ -8,7 +8,7 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  background: ${(props) => props.theme['base-card']};
+  background: ${({ theme }) => theme.colors['base-card']};
   border-radius: 6px 2.25rem 6px 2.25rem;
 
   > img {
@@ -22,7 +22,7 @@ export const CardContainer = styled.div`
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.625rem;
-    color: ${(props) => props.theme['base-subtitle']};
+    color: ${({ theme }) => theme.colors['base-subtitle']};
   }
 
   > p {
@@ -30,7 +30,7 @@ export const CardContainer = styled.div`
     font-size: 0.875rem;
     line-height: 1.1375rem;
     text-align: center;
-    color: ${(props) => props.theme['base-label']};
+    color: ${({ theme }) => theme.colors['base-label']};
   }
 `
 
@@ -45,8 +45,8 @@ export const TagContainer = styled.div`
     font-weight: 700;
     line-height: 0.8125rem;
     text-transform: uppercase;
-    background: ${(props) => props.theme['yellow-light']};
-    color: ${(props) => props.theme['yellow-dark']};
+    background: ${({ theme }) => theme.colors['yellow-light']};
+    color: ${({ theme }) => theme.colors['yellow-dark']};
 
     border-radius: 1rem;
   }
@@ -66,7 +66,7 @@ export const BuyContainer = styled.div`
     font-size: 1.5rem;
     font-weight: 800;
     line-height: 1.95rem;
-    color: ${(props) => props.theme['base-text']};
+    color: ${({ theme }) => theme.colors['base-text']};
 
     span {
       margin-right: 4px;

@@ -23,8 +23,8 @@ export const HeaderContainer = styled.header`
       font-size: 0.875rem;
       line-height: 1.3rem;
       align-items: center;
-      color: ${(props) => props.theme['purple-dark']};
-      background: ${(props) => props.theme['purple-light']};
+      color: ${({ theme }) => theme.colors['purple-dark']};
+      background: ${({ theme }) => theme.colors['purple-light']};
       border-radius: 6px;
       transition: background 2s;
     }
@@ -32,8 +32,8 @@ export const HeaderContainer = styled.header`
     a {
       padding: 0.5rem;
       line-height: 0;
-      color: ${(props) => props.theme['yellow-dark']};
-      background: ${(props) => props.theme['yellow-light']};
+      color: ${({ theme }) => theme.colors['yellow-dark']};
+      background: ${({ theme }) => theme.colors['yellow-light']};
       border-radius: 6px;
     }
   }

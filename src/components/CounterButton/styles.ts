@@ -7,7 +7,7 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   gap: 0.25rem;
 
-  background: ${(props) => props.theme['base-button']};
+  background: ${({ theme }) => theme.colors['base-button']};
   border-radius: 6px;
 
   span {
@@ -31,12 +31,12 @@ export const ButtonContainer = styled.div`
     cursor: pointer;
 
     svg {
-      color: ${(props) => props.theme.purple};
+      color: ${({ theme }) => theme.colors.purple};
 
       transition: color 0.2s;
 
       &:hover {
-        color: ${(props) => props.theme['purple-dark']};
+        color: ${({ theme }) => theme.colors['purple-dark']};
       }
     }
   }
