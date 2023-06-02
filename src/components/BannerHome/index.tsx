@@ -4,7 +4,7 @@ import imgIntro from '../../../assets/img-intro.svg'
 
 import { Container, Content, ItemColumns, Item } from './styles'
 
-export function Intro() {
+export function BannerHome() {
   return (
     <Container>
       <Content>
