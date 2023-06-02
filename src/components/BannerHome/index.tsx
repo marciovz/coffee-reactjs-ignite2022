@@ -1,6 +1,6 @@
 import { ShoppingCart, Timer, Package, Coffee } from 'phosphor-react'
 
-import imgIntro from '../../../assets/img-intro.svg'
+import imgBannerHome from '../../assets/img-banner-home.svg'
 
 import { Container, Content, ItemColumns, Item } from './styles'
 
@@ -40,7 +40,7 @@ export function BannerHome() {
         </section>
 
         <section>
-          <img src={imgIntro} alt="" />
+          <img src={imgBannerHome} alt="" />
         </section>
       </Content>
     </Container>

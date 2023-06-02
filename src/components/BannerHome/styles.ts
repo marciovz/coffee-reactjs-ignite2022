@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import backgroundIntro from '../../../assets/background-intro.svg'
+import backgroundBannerHome from '../../assets/background-banner-home.svg'
 
 export const Container = styled.div`
   width: 100%;
-  background-image: url(${backgroundIntro});
+  background-image: url(${backgroundBannerHome});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
