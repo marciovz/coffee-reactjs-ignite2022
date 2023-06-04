@@ -18,7 +18,7 @@ export const ButtonContainer = styled.div`
     justify-content: center;
 
     font: ${({ theme }) => theme.fonts['roboto-400']};
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 1.375rem;
   }
 
