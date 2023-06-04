@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 
 import { Input } from '../../components/Form/Input'
+import { PaymentTypeButton } from '../../components/Form/PaymentTypeButton'
+import { CardCartItem } from '../../components/CardCartItem'
 
 import {
   Container,
@@ -9,11 +12,18 @@ import {
   CardFormHeader,
   Form,
   LineForm,
+  PaymentContainer,
   CartContainer,
   Cart,
+  Description,
+  ButtonConfirm,
 } from './styles'
 
+type IPaymentType = 'credit' | 'debit' | 'cash'
+
 export function Checkout() {
+  const [paymentType, setPaymentType] = useState<IPaymentType>('credit')
+
   return (
     <Container>
       <ContainerForm>
@@ -57,13 +67,50 @@ export function Checkout() {
               </p>
             </div>
           </CardFormHeader>
+
+          <PaymentContainer>
+            <PaymentTypeButton
+              title="Cartão de Crédito"
+              type="credit"
+              isActive={paymentType === 'credit'}
+              onClick={() => setPaymentType('credit')}
+            />
+            <PaymentTypeButton
+              title="Cartão de Débito"
+              type="debit"
+              isActive={paymentType === 'debit'}
+              onClick={() => setPaymentType('debit')}
+            />
+            <PaymentTypeButton
+              title="Dinheiro"
+              type="cash"
+              isActive={paymentType === 'cash'}
+              onClick={() => setPaymentType('cash')}
+            />
+          </PaymentContainer>
         </CardForm>
       </ContainerForm>
 
       <CartContainer>
         <h2>Cafés selecionados</h2>
         <Cart>
-          <p>Lista de cafés do carrilho</p>
+          <CardCartItem />
+          <CardCartItem />
+          <Description>
+            <div>
+              <p>Total de ítens</p>
+              <span>R$ 29,70</span>
+            </div>
+            <div>
+              <p>Entrega</p>
+              <span>R$ 3,50</span>
+            </div>
+            <div>
+              <p>Total</p>
+              <span>R$ 33,20</span>
+            </div>
+          </Description>
+          <ButtonConfirm>Confirmar Pedido</ButtonConfirm>
         </Cart>
       </CartContainer>
     </Container>
