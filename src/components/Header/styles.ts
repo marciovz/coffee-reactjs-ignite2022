@@ -18,12 +18,16 @@ export const HeaderContainer = styled.header`
     align-items: center;
 
     span {
-      display: flex;
       padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+
+      font: ${({ theme }) => theme.fonts['roboto-400']};
+      color: ${({ theme }) => theme.colors['purple-dark']};
       font-size: 0.875rem;
       line-height: 1.3rem;
-      align-items: center;
-      color: ${({ theme }) => theme.colors['purple-dark']};
+
       background: ${({ theme }) => theme.colors['purple-light']};
       border-radius: 6px;
       transition: background 2s;
