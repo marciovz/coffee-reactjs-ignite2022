@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 
 import { Input } from '../../components/Form/Input'
@@ -23,6 +24,12 @@ type IPaymentType = 'credit' | 'debit' | 'cash'
 
 export function Checkout() {
   const [paymentType, setPaymentType] = useState<IPaymentType>('credit')
+
+  const navigate = useNavigate()
+
+  function handleConfirm() {
+    navigate('/success')
+  }
 
   return (
     <Container>
@@ -110,7 +117,9 @@ export function Checkout() {
               <span>R$ 33,20</span>
             </div>
           </Description>
-          <ButtonConfirm>Confirmar Pedido</ButtonConfirm>
+          <ButtonConfirm onClick={handleConfirm}>
+            Confirmar Pedido
+          </ButtonConfirm>
         </Cart>
       </CartContainer>
     </Container>
