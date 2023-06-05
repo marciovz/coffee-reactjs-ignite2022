@@ -12,18 +12,13 @@ interface ICoffee {
   image: string
 }
 
-interface IAddToCartParams {
-  id: string
-  quantity: number
-}
-
 interface ICoffeeCardProps {
   coffee: ICoffee
-  onAddToCart: (addToCartParams: IAddToCartParams) => void
+  onAddToCart: (coffeeId: string, quantity: number) => void
 }
 
 export function CoffeeCard({ coffee, onAddToCart }: ICoffeeCardProps) {
-  const [quantity, setQuantity] = useState(0)
+  const [quantity, setQuantity] = useState(1)
 
   const handleNewQuantity = (value: number) => {
     setQuantity(value)
@@ -32,10 +27,7 @@ export function CoffeeCard({ coffee, onAddToCart }: ICoffeeCardProps) {
   const handleAddToCart = () => {
     if (quantity <= 0) return
 
-    onAddToCart({
-      id: coffee.id,
-      quantity,
-    })
+    onAddToCart(coffee.id, quantity)
   }
 
   const priceFormated = '9,90'
@@ -57,8 +49,8 @@ export function CoffeeCard({ coffee, onAddToCart }: ICoffeeCardProps) {
         </p>
         <div>
           <CounterButton
-            initialValue={0}
-            minValue={0}
+            initialValue={1}
+            minValue={1}
             maxValue={100}
             onClick={handleNewQuantity}
           />

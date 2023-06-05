@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { BannerHome } from '../../components/BannerHome'
 import { CoffeeCard } from '../../components/CoffeeCard'
+import { useCart } from '../../store/cartStore/useCart'
 
 import { CoffeeListContainer, CoffeeList } from './styles'
 
@@ -18,7 +19,7 @@ interface ICoffee {
 export function Home() {
   const [coffeeList, setCoffeeList] = useState<ICoffee[]>([])
 
-  function editShoppingCart() {}
+  const { addCoffeeToCart } = useCart()
 
   useEffect(() => {
     async function loadCoffees() {
@@ -38,7 +39,7 @@ export function Home() {
             <CoffeeCard
               key={item.id}
               coffee={item}
-              onAddToCart={editShoppingCart}
+              onAddToCart={addCoffeeToCart}
             />
           ))}
         </CoffeeList>
