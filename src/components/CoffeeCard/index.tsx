@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { AddCartButton } from '../AddCartButton'
 import { CounterButton } from '../CounterButton'
 import { CardContainer, TagContainer, BuyContainer } from './styles'
@@ -30,7 +30,13 @@ export function CoffeeCard({ coffee, onAddToCart }: ICoffeeCardProps) {
     onAddToCart(coffee.id, quantity)
   }
 
-  const priceFormated = '9,90'
+  const priceFormated = useMemo(() => {
+    return coffee.price.toLocaleString('pt-BR', {
+      style: 'decimal',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+  }, [coffee.price])
 
   return (
     <CardContainer>
