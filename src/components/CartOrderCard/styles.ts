@@ -66,3 +66,23 @@ export const ButtonConfirm = styled.button`
     background: ${({ theme }) => theme.colors['yellow-dark']};
   }
 `
+
+export const EmptyCart = styled.div`
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors['base-button']};
+
+  & > span {
+    font: ${({ theme }) => theme.fonts['baloo-700']};
+    font-size: 1.5rem;
+
+    p {
+      font: ${({ theme }) => theme.fonts['roboto-400']};
+      font-size: 1rem;
+    }
+  }
+`
