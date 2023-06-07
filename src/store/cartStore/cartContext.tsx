@@ -2,14 +2,23 @@ import { ReactNode, createContext, useReducer } from 'react'
 import { INITIAL_STATE, CartReducer } from './cartReducer'
 import { addCoffee, setQuantity } from './cartActions'
 
-interface CoffeeCart {
-  coffeeId: string
+interface Coffee {
+  id: string
+  tag: string[]
+  title: string
+  description: string
+  price: number
+  image: string
+}
+
+export interface CoffeeCart {
+  coffee: Coffee
   quantity: number
 }
 
 interface CartContextData {
   coffeesCart: CoffeeCart[]
-  addCoffeeToCart: (coffeeId: string, quantity: number) => void
+  addCoffeeToCart: (coffeeCart: CoffeeCart) => void
   setCoffeeQuantity: (coffeeId: string, quantity: number) => void
 }
 
@@ -24,8 +33,8 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const { coffeesCart } = cartState
 
-  function addCoffeeToCart(coffeeId: string, quantity: number) {
-    dispatch(addCoffee({ coffeeId, quantity }))
+  function addCoffeeToCart(coffeeCart: CoffeeCart) {
+    dispatch(addCoffee(coffeeCart))
   }
 
   function setCoffeeQuantity(coffeeId: string, quantity: number) {

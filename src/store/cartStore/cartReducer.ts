@@ -1,9 +1,7 @@
-import { CartActionTypes } from './cartActions'
+import { produce } from 'immer'
 
-interface CoffeeCart {
-  coffeeId: string
-  quantity: number
-}
+import { CartActionTypes } from './cartActions'
+import { CoffeeCart } from './cartContext'
 
 interface CartState {
   coffeesCart: CoffeeCart[]
@@ -16,41 +14,32 @@ export const INITIAL_STATE = {
 export function CartReducer(state: CartState, action: any) {
   switch (action.type) {
     case CartActionTypes.ADD_COFFEE: {
-      const coffees = [...state.coffeesCart]
+      return produce(state, (draft: CartState) => {
+        const index = draft.coffeesCart.findIndex(
+          (coffeeCart) => coffeeCart.coffee.id === action.payload.coffee.id,
+        )
 
-      const index = coffees.findIndex(
-        (coffee) => coffee.coffeeId === action.payload.coffeeId,
-      )
-
-      if (index >= 0) {
-        coffees[index].quantity += action.payload.quantity
-      } else {
-        coffees.push({
-          coffeeId: action.payload.coffeeId,
-          quantity: action.payload.quantity,
-        })
-      }
-
-      return {
-        ...state,
-        coffeesCart: coffees,
-      }
+        if (index >= 0) {
+          draft.coffeesCart[index].quantity = action.payload.quantity
+        } else {
+          draft.coffeesCart.push({
+            coffee: action.payload.coffee,
+            quantity: action.payload.quantity,
+          })
+        }
+      })
     }
 
     case CartActionTypes.SET_QUANTITY: {
-      const coffees = [...state.coffeesCart]
+      return produce(state, (draft: CartState) => {
+        const index = draft.coffeesCart.findIndex(
+          (coffeeCart) => coffeeCart.coffee.id === action.payload.coffee.id,
+        )
 
-      const index = coffees.findIndex(
-        (coffee) => coffee.coffeeId === action.payload.coffeeId,
-      )
-
-      if (index >= 0) {
-        coffees[index].quantity = action.payload.quantity
-      }
-      return {
-        ...state,
-        coffeesCart: coffees,
-      }
+        if (index >= 0) {
+          draft.coffeesCart[index].quantity += action.payload.quantity
+        }
+      })
     }
 
     default:

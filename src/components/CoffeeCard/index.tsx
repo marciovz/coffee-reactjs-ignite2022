@@ -3,7 +3,7 @@ import { AddCartButton } from '../AddCartButton'
 import { CounterButton } from '../CounterButton'
 import { CardContainer, TagContainer, BuyContainer } from './styles'
 
-interface ICoffee {
+interface Coffee {
   id: string
   tag: string[]
   title: string
@@ -12,22 +12,27 @@ interface ICoffee {
   image: string
 }
 
-interface ICoffeeCardProps {
-  coffee: ICoffee
-  onAddToCart: (coffeeId: string, quantity: number) => void
+interface CoffeeCart {
+  coffee: Coffee
+  quantity: number
 }
 
-export function CoffeeCard({ coffee, onAddToCart }: ICoffeeCardProps) {
+interface CoffeeCardProps {
+  coffee: Coffee
+  onAddToCart: (coffeeCart: CoffeeCart) => void
+}
+
+export function CoffeeCard({ coffee, onAddToCart }: CoffeeCardProps) {
   const [quantity, setQuantity] = useState(1)
 
   const handleNewQuantity = (value: number) => {
     setQuantity(value)
   }
 
-  const handleAddToCart = () => {
+  function handleAddToCart() {
     if (quantity <= 0) return
 
-    onAddToCart(coffee.id, quantity)
+    onAddToCart({ coffee, quantity })
   }
 
   const priceFormated = useMemo(() => {

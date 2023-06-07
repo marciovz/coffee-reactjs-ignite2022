@@ -1,7 +1,4 @@
-interface AddCoffeeProps {
-  coffeeId: string
-  quantity: number
-}
+import { CoffeeCart } from './cartContext'
 
 interface SetQuantityProps {
   coffeeId: string
@@ -13,11 +10,11 @@ export const CartActionTypes = {
   SET_QUANTITY: 'SET_QUANTITY',
 }
 
-export function addCoffee({ coffeeId, quantity }: AddCoffeeProps) {
+export function addCoffee({ coffee, quantity }: CoffeeCart) {
   return {
     type: CartActionTypes.ADD_COFFEE,
     payload: {
-      coffeeId,
+      coffee,
       quantity,
     },
   }
