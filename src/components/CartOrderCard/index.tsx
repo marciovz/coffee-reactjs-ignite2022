@@ -50,7 +50,6 @@ export function CartOrderCard() {
         coffee: {
           ...coffeeCartItem.coffee,
           title: captalise(coffeeCartItem.coffee.title),
-          // priceFormated: formatPrice(coffeeCartItem.coffee.price),
         },
         quantity: coffeeCartItem.quantity,
       }

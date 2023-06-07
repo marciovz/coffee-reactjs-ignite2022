@@ -9,19 +9,18 @@ interface CounterButtonProps {
   initialValue?: number
   maxValue?: number
   minValue?: number
-  onClickIncrement?: (newValue: number | null) => void
-  onClickDecrement?: (newValue: number | null) => void
-  // onClickQuantity?: (newValue: number) => void
+  onClickIncrement: (newValue: number | null) => void
+  onClickDecrement: (newValue: number | null) => void
 }
 
 export function CounterButton({
   control = 'internal',
   value = 0,
   initialValue = 0,
-  maxValue = 100,
+  maxValue = 99,
   minValue = 0,
-  onClickIncrement = () => {},
-  onClickDecrement = () => {},
+  onClickIncrement,
+  onClickDecrement,
 }: CounterButtonProps) {
   const [valueDisplay, setValueDisplay] = useState(initialValue)
 
@@ -32,26 +31,26 @@ export function CounterButton({
   }, [control, value])
 
   const handleIncrementValue = () => {
-    if (control === 'internal') {
-      if (valueDisplay < maxValue) {
+    if (valueDisplay < maxValue) {
+      if (control === 'internal') {
         const newState = valueDisplay + 1
         setValueDisplay(newState)
         onClickIncrement(newState)
+      } else {
+        onClickIncrement(null)
       }
-    } else {
-      onClickIncrement(null)
     }
   }
 
   const handleDecrementValue = () => {
-    if (control === 'internal') {
-      if (valueDisplay > minValue) {
+    if (valueDisplay > minValue) {
+      if (control === 'internal') {
         const newState = valueDisplay - 1
         setValueDisplay(newState)
         onClickDecrement(newState)
+      } else {
+        onClickDecrement(null)
       }
-    } else {
-      onClickDecrement(null)
     }
   }
 

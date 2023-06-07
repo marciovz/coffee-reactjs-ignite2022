@@ -51,7 +51,7 @@ export function CardCartItem({
           <CounterButton
             control="external"
             value={coffeeCart.quantity}
-            initialValue={0}
+            minValue={1}
             onClickIncrement={handleIncrementCoffee}
             onClickDecrement={handleDecrementCoffee}
           />
