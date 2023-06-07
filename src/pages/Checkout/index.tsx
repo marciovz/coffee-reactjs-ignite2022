@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 
 import { Input } from '../../components/Form/Input'
 import { PaymentTypeButton } from '../../components/Form/PaymentTypeButton'
-import { CardCartItem } from '../../components/CardCartItem'
+import { CartOrderCard } from '../../components/CartOrderCard'
 
 import {
   Container,
@@ -14,22 +13,12 @@ import {
   Form,
   LineForm,
   PaymentContainer,
-  CartContainer,
-  Cart,
-  Description,
-  ButtonConfirm,
 } from './styles'
 
 type IPaymentType = 'credit' | 'debit' | 'cash'
 
 export function Checkout() {
   const [paymentType, setPaymentType] = useState<IPaymentType>('credit')
-
-  const navigate = useNavigate()
-
-  function handleConfirm() {
-    navigate('/success')
-  }
 
   return (
     <Container>
@@ -98,30 +87,7 @@ export function Checkout() {
         </CardForm>
       </ContainerForm>
 
-      <CartContainer>
-        <h2>Cafés selecionados</h2>
-        <Cart>
-          <CardCartItem />
-          <CardCartItem />
-          <Description>
-            <div>
-              <p>Total de ítens</p>
-              <span>R$ 29,70</span>
-            </div>
-            <div>
-              <p>Entrega</p>
-              <span>R$ 3,50</span>
-            </div>
-            <div>
-              <p>Total</p>
-              <span>R$ 33,20</span>
-            </div>
-          </Description>
-          <ButtonConfirm onClick={handleConfirm}>
-            Confirmar Pedido
-          </ButtonConfirm>
-        </Cart>
-      </CartContainer>
+      <CartOrderCard />
     </Container>
   )
 }
