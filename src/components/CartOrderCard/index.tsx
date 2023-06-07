@@ -32,19 +32,20 @@ export function CartOrderCard() {
   const [coffeesOrder, setCoffeesOrder] = useState<CoffeeOrderCart[]>([])
 
   const navigate = useNavigate()
-  const { coffeesCart } = useCart()
+  const { coffeesCart, incrementQuantityCoffee, decrementQuantityCoffee } =
+    useCart()
 
-  const isOrderCartEmpty = coffeesCart.length === 0
+  const isOrderCartEmpty = coffeesCart?.length === 0
   const deliveryFee = 3.5
 
   const totalPriceItems = useMemo(() => {
-    return coffeesOrder.reduce((acc, order) => {
+    return coffeesOrder?.reduce((acc, order) => {
       return acc + order.coffee.price * order.quantity
     }, 0)
   }, [coffeesOrder])
 
   useEffect(() => {
-    const FormattedCoffeeCart = coffeesCart.map((coffeeCartItem) => {
+    const FormattedCoffeeCart = coffeesCart?.map((coffeeCartItem) => {
       return {
         coffee: {
           ...coffeeCartItem.coffee,
@@ -86,6 +87,8 @@ export function CartOrderCard() {
               <CardCartItem
                 key={coffeeCart.coffee.id}
                 coffeeCart={coffeeCart}
+                onIncrementCoffee={incrementQuantityCoffee}
+                onDecrementCoffee={decrementQuantityCoffee}
               />
             ))}
             <Description>

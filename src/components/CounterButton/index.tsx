@@ -1,46 +1,67 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Plus, Minus } from 'phosphor-react'
 
 import { ButtonContainer } from './styles'
 
 interface CounterButtonProps {
+  control?: 'internal' | 'external'
+  value?: number
   initialValue?: number
   maxValue?: number
   minValue?: number
-  onClick: (value: number) => void
+  onClickIncrement?: (newValue: number | null) => void
+  onClickDecrement?: (newValue: number | null) => void
+  // onClickQuantity?: (newValue: number) => void
 }
 
 export function CounterButton({
+  control = 'internal',
+  value = 0,
   initialValue = 0,
   maxValue = 100,
   minValue = 0,
-  onClick,
+  onClickIncrement = () => {},
+  onClickDecrement = () => {},
 }: CounterButtonProps) {
-  const [value, setValue] = useState(initialValue)
+  const [valueDisplay, setValueDisplay] = useState(initialValue)
 
-  const increaseValue = () => {
-    if (value < maxValue) {
-      const newState = value + 1
-      setValue(newState)
-      onClick(newState)
+  useEffect(() => {
+    if (control === 'external') {
+      setValueDisplay(value)
+    }
+  }, [control, value])
+
+  const handleIncrementValue = () => {
+    if (control === 'internal') {
+      if (valueDisplay < maxValue) {
+        const newState = valueDisplay + 1
+        setValueDisplay(newState)
+        onClickIncrement(newState)
+      }
+    } else {
+      onClickIncrement(null)
     }
   }
 
-  const decreaseValue = () => {
-    if (value > minValue) {
-      const newState = value - 1
-      setValue(newState)
-      onClick(newState)
+  const handleDecrementValue = () => {
+    if (control === 'internal') {
+      if (valueDisplay > minValue) {
+        const newState = valueDisplay - 1
+        setValueDisplay(newState)
+        onClickDecrement(newState)
+      }
+    } else {
+      onClickDecrement(null)
     }
   }
 
   return (
     <ButtonContainer>
-      <button onClick={decreaseValue}>
+      <button onClick={handleDecrementValue}>
         <Minus size={14} weight="bold" />
       </button>
-      <span>{value}</span>
-      <button onClick={increaseValue}>
+      <span>{valueDisplay}</span>
+      <button onClick={handleIncrementValue}>
         <Plus size={14} weight="bold" />
       </button>
     </ButtonContainer>

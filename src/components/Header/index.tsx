@@ -22,7 +22,7 @@ export function Header() {
 
         <NavLink to="/checkout" title="cart">
           <ButtonCart>
-            {coffeesCart.length > 0 && <span>{coffeesCart.length}</span>}
+            {coffeesCart?.length > 0 && <span>{coffeesCart.length}</span>}
             <ShoppingCart size={22} weight="fill" />
           </ButtonCart>
         </NavLink>

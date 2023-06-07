@@ -63,7 +63,8 @@ export function CoffeeCard({ coffee, onAddToCart }: CoffeeCardProps) {
             initialValue={1}
             minValue={1}
             maxValue={100}
-            onClick={handleNewQuantity}
+            onClickIncrement={handleNewQuantity}
+            onClickDecrement={handleNewQuantity}
           />
           <AddCartButton onClick={handleAddToCart} />
         </div>

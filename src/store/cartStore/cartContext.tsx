@@ -1,6 +1,11 @@
 import { ReactNode, createContext, useReducer } from 'react'
 import { INITIAL_STATE, CartReducer } from './cartReducer'
-import { addCoffee, setQuantity } from './cartActions'
+import {
+  addCoffee,
+  setQuantity,
+  incrementQuantity,
+  decrementQuantity,
+} from './cartActions'
 
 interface Coffee {
   id: string
@@ -19,7 +24,9 @@ export interface CoffeeCart {
 interface CartContextData {
   coffeesCart: CoffeeCart[]
   addCoffeeToCart: (coffeeCart: CoffeeCart) => void
-  setCoffeeQuantity: (coffeeId: string, quantity: number) => void
+  setCoffeeQuantity: (id: string, quantity: number) => void
+  incrementQuantityCoffee: (id: string) => void
+  decrementQuantityCoffee: (id: string) => void
 }
 
 interface CartProviderProps {
@@ -37,8 +44,16 @@ export function CartProvider({ children }: CartProviderProps) {
     dispatch(addCoffee(coffeeCart))
   }
 
-  function setCoffeeQuantity(coffeeId: string, quantity: number) {
-    dispatch(setQuantity({ coffeeId, quantity }))
+  function setCoffeeQuantity(id: string, quantity: number) {
+    dispatch(setQuantity({ id, quantity }))
+  }
+
+  function incrementQuantityCoffee(id: string) {
+    dispatch(incrementQuantity(id))
+  }
+
+  function decrementQuantityCoffee(id: string) {
+    dispatch(decrementQuantity(id))
   }
 
   return (
@@ -47,6 +62,8 @@ export function CartProvider({ children }: CartProviderProps) {
         coffeesCart,
         addCoffeeToCart,
         setCoffeeQuantity,
+        incrementQuantityCoffee,
+        decrementQuantityCoffee,
       }}
     >
       {children}

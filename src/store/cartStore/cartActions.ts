@@ -1,13 +1,15 @@
 import { CoffeeCart } from './cartContext'
 
 interface SetQuantityProps {
-  coffeeId: string
+  id: string
   quantity: number
 }
 
 export const CartActionTypes = {
   ADD_COFFEE: 'ADD_COFFEE',
   SET_QUANTITY: 'SET_QUANTITY',
+  INCREMENT_QUANTITY: 'INCREMENT_QUANTITY',
+  DECREMENT_QUANTITY: 'DECREMENT_QUANTITY',
 }
 
 export function addCoffee({ coffee, quantity }: CoffeeCart) {
@@ -20,12 +22,30 @@ export function addCoffee({ coffee, quantity }: CoffeeCart) {
   }
 }
 
-export function setQuantity({ coffeeId, quantity }: SetQuantityProps) {
+export function setQuantity({ id, quantity }: SetQuantityProps) {
   return {
     type: CartActionTypes.SET_QUANTITY,
     payload: {
-      coffeeId,
+      id,
       quantity,
+    },
+  }
+}
+
+export function incrementQuantity(id: string) {
+  return {
+    type: CartActionTypes.INCREMENT_QUANTITY,
+    payload: {
+      id,
+    },
+  }
+}
+
+export function decrementQuantity(id: string) {
+  return {
+    type: CartActionTypes.DECREMENT_QUANTITY,
+    payload: {
+      id,
     },
   }
 }
