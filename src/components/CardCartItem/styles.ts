@@ -12,6 +12,8 @@ export const Container = styled.div`
   }
 
   > p {
+    min-width: 4.7rem;
+    text-align: end;
     font: ${({ theme }) => theme.fonts['roboto-700']};
     color: ${({ theme }) => theme.colors['base-text']};
     font-size: 1rem;
