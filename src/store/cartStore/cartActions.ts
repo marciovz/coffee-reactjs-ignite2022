@@ -10,6 +10,7 @@ export const CartActionTypes = {
   SET_QUANTITY: 'SET_QUANTITY',
   INCREMENT_QUANTITY: 'INCREMENT_QUANTITY',
   DECREMENT_QUANTITY: 'DECREMENT_QUANTITY',
+  REMOVE_COFFEE: 'REMOVE_COFFEE',
 }
 
 export function addCoffee({ coffee, quantity }: CoffeeCart) {
@@ -44,6 +45,15 @@ export function incrementQuantity(id: string) {
 export function decrementQuantity(id: string) {
   return {
     type: CartActionTypes.DECREMENT_QUANTITY,
+    payload: {
+      id,
+    },
+  }
+}
+
+export function removeCoffee(id: string) {
+  return {
+    type: CartActionTypes.REMOVE_COFFEE,
     payload: {
       id,
     },

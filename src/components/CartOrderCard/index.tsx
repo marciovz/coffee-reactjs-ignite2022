@@ -32,8 +32,12 @@ export function CartOrderCard() {
   const [coffeesOrder, setCoffeesOrder] = useState<CoffeeOrderCart[]>([])
 
   const navigate = useNavigate()
-  const { coffeesCart, incrementQuantityCoffee, decrementQuantityCoffee } =
-    useCart()
+  const {
+    coffeesCart,
+    incrementQuantityCoffee,
+    decrementQuantityCoffee,
+    removeCoffeeCart,
+  } = useCart()
 
   const isOrderCartEmpty = coffeesCart?.length === 0
   const deliveryFee = 3.5
@@ -65,6 +69,10 @@ export function CartOrderCard() {
     navigate('/success')
   }
 
+  function removeCart(id: string) {
+    removeCoffeeCart(id)
+  }
+
   const FormattedTotalPriceItems = formatPrice(totalPriceItems)
   const FormattedDeliveryFee = formatPrice(deliveryFee)
   const FormattedTotal = formatPrice(totalPriceItems + deliveryFee)
@@ -88,6 +96,7 @@ export function CartOrderCard() {
                 coffeeCart={coffeeCart}
                 onIncrementCoffee={incrementQuantityCoffee}
                 onDecrementCoffee={decrementQuantityCoffee}
+                onRemoveCoffee={removeCart}
               />
             ))}
             <Description>

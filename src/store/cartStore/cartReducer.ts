@@ -14,7 +14,7 @@ export const INITIAL_STATE = {
 export function CartReducer(state: CartState, action: any) {
   switch (action.type) {
     case CartActionTypes.ADD_COFFEE: {
-      return produce(state, (draft: CartState) => {
+      return produce(state, (draft) => {
         const index = draft.coffeesCart.findIndex(
           (coffeeCart) => coffeeCart.coffee.id === action.payload.coffee.id,
         )
@@ -31,7 +31,7 @@ export function CartReducer(state: CartState, action: any) {
     }
 
     case CartActionTypes.SET_QUANTITY: {
-      return produce(state, (draft: CartState) => {
+      return produce(state, (draft) => {
         const index = draft.coffeesCart.findIndex(
           (coffeeCart) => coffeeCart.coffee.id === action.payload.id,
         )
@@ -43,7 +43,7 @@ export function CartReducer(state: CartState, action: any) {
     }
 
     case CartActionTypes.INCREMENT_QUANTITY: {
-      return produce(state, (draft: CartState) => {
+      return produce(state, (draft) => {
         const index = draft.coffeesCart.findIndex(
           (coffeeCart) => coffeeCart.coffee.id === action.payload.id,
         )
@@ -56,7 +56,7 @@ export function CartReducer(state: CartState, action: any) {
     }
 
     case CartActionTypes.DECREMENT_QUANTITY: {
-      return produce(state, (draft: CartState) => {
+      return produce(state, (draft) => {
         const index = draft.coffeesCart.findIndex(
           (coffeeCart) => coffeeCart.coffee.id === action.payload.id,
         )
@@ -64,6 +64,18 @@ export function CartReducer(state: CartState, action: any) {
         if (index >= 0) {
           draft.coffeesCart[index].quantity =
             draft.coffeesCart[index].quantity - 1
+        }
+      })
+    }
+
+    case CartActionTypes.REMOVE_COFFEE: {
+      return produce(state, (draft) => {
+        const index = draft.coffeesCart.findIndex(
+          (coffeeCart) => coffeeCart.coffee.id === action.payload.id,
+        )
+
+        if (index >= 0) {
+          draft.coffeesCart.splice(index, 1)
         }
       })
     }

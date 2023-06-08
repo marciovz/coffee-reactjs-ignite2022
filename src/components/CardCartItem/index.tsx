@@ -1,9 +1,9 @@
 import { Trash } from 'phosphor-react'
 
 import { CounterButton } from '../CounterButton'
+import { formatPrice } from '../../utils/formatPrice'
 
 import { Container, BoxContent, BoxButton, RemoveItemButton } from './styles'
-import { formatPrice } from '../../utils/formatPrice'
 
 interface Coffee {
   id: string
@@ -23,12 +23,14 @@ interface CardCartItemProps {
   coffeeCart: CoffeeCart
   onIncrementCoffee: (id: string) => void
   onDecrementCoffee: (id: string) => void
+  onRemoveCoffee: (id: string) => void
 }
 
 export function CardCartItem({
   coffeeCart,
   onIncrementCoffee,
   onDecrementCoffee,
+  onRemoveCoffee,
 }: CardCartItemProps) {
   const { coffee, quantity } = coffeeCart
 
@@ -38,6 +40,10 @@ export function CardCartItem({
 
   function handleDecrementCoffee() {
     onDecrementCoffee(coffee.id)
+  }
+
+  function handleRemoveCoffee() {
+    onRemoveCoffee(coffee.id)
   }
 
   const formattedTotalItem = formatPrice(coffee.price * quantity)
@@ -55,7 +61,7 @@ export function CardCartItem({
             onClickIncrement={handleIncrementCoffee}
             onClickDecrement={handleDecrementCoffee}
           />
-          <RemoveItemButton>
+          <RemoveItemButton onClick={handleRemoveCoffee}>
             <Trash />
             Remover
           </RemoveItemButton>
