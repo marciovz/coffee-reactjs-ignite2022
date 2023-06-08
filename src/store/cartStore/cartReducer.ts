@@ -2,13 +2,14 @@ import { produce } from 'immer'
 
 import { CartActionTypes } from './cartActions'
 import { CoffeeCart } from './cartContext'
+import { GetCoffeesCart, SaveCoffeeCart } from './cartStorage'
 
 interface CartState {
   coffeesCart: CoffeeCart[]
 }
 
 export const INITIAL_STATE = {
-  coffeesCart: [],
+  coffeesCart: GetCoffeesCart(),
 }
 
 export function CartReducer(state: CartState, action: any) {
@@ -27,6 +28,8 @@ export function CartReducer(state: CartState, action: any) {
             quantity: action.payload.quantity,
           })
         }
+
+        SaveCoffeeCart(draft.coffeesCart)
       })
     }
 
@@ -39,6 +42,8 @@ export function CartReducer(state: CartState, action: any) {
         if (index >= 0) {
           draft.coffeesCart[index].quantity += action.payload.quantity
         }
+
+        SaveCoffeeCart(draft.coffeesCart)
       })
     }
 
@@ -52,6 +57,8 @@ export function CartReducer(state: CartState, action: any) {
           draft.coffeesCart[index].quantity =
             draft.coffeesCart[index].quantity + 1
         }
+
+        SaveCoffeeCart(draft.coffeesCart)
       })
     }
 
@@ -65,6 +72,8 @@ export function CartReducer(state: CartState, action: any) {
           draft.coffeesCart[index].quantity =
             draft.coffeesCart[index].quantity - 1
         }
+
+        SaveCoffeeCart(draft.coffeesCart)
       })
     }
 
@@ -77,6 +86,8 @@ export function CartReducer(state: CartState, action: any) {
         if (index >= 0) {
           draft.coffeesCart.splice(index, 1)
         }
+
+        SaveCoffeeCart(draft.coffeesCart)
       })
     }
 
