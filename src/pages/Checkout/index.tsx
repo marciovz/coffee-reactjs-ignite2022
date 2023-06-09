@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 import { useForm, FormProvider } from 'react-hook-form'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 
 import { AddressForm } from '../../components/Form/AddressForm'
 import { PaymentTypeButton } from '../../components/Form/PaymentTypeButton'
 import { CartOrderCard } from '../../components/CartOrderCard'
+import { api } from '../../services/api'
+import { useCart } from '../../store/hooks'
 
 import {
   Container,
@@ -14,6 +16,7 @@ import {
   CardForm,
   CardFormHeader,
   PaymentContainer,
+  PaymentError,
 } from './styles'
 
 type IPaymentType = 'credit' | 'debit' | 'cash' | 'none'
@@ -32,18 +35,44 @@ export type AddressFormData = zod.infer<typeof addressFormValidatorSchema>
 
 export function Checkout() {
   const [paymentType, setPaymentType] = useState<IPaymentType>('none')
+  const [isPaymentTypeError, setIsPaymentTypeError] = useState(false)
+
+  const { coffeesCart } = useCart()
 
   const dataForm = useForm<AddressFormData>({
     resolver: zodResolver(addressFormValidatorSchema),
   })
 
-  const { handleSubmit, formState } = dataForm
+  const { handleSubmit } = dataForm
 
-  const { errors } = formState
-  console.log(errors)
+  function handleSetPaymentType(type: IPaymentType) {
+    setPaymentType(type)
+    setIsPaymentTypeError(false)
+  }
 
-  function confirmOrder(data: AddressFormData) {
-    console.log(data)
+  async function confirmOrder(data: AddressFormData) {
+    if (paymentType === 'none') {
+      setIsPaymentTypeError(true)
+      return
+    }
+
+    const tax = 3.5
+
+    await api.post('/coffeeCart', {
+      date: new Date(),
+      order: coffeesCart.map((orderItem) => ({
+        id: orderItem.coffee.id,
+        title: orderItem.coffee.title,
+        price: orderItem.coffee.price,
+        quantity: orderItem.quantity,
+      })),
+      address: data,
+      tax,
+      total:
+        coffeesCart.reduce((acc, cart) => {
+          return (acc += cart.coffee.price * cart.quantity)
+        }, 0) + tax,
+    })
   }
 
   return (
@@ -81,21 +110,26 @@ export function Checkout() {
                 title="Cartão de Crédito"
                 type="credit"
                 isActive={paymentType === 'credit'}
-                onClick={() => setPaymentType('credit')}
+                onClick={() => handleSetPaymentType('credit')}
               />
               <PaymentTypeButton
                 title="Cartão de Débito"
                 type="debit"
                 isActive={paymentType === 'debit'}
-                onClick={() => setPaymentType('debit')}
+                onClick={() => handleSetPaymentType('debit')}
               />
               <PaymentTypeButton
                 title="Dinheiro"
                 type="cash"
                 isActive={paymentType === 'cash'}
-                onClick={() => setPaymentType('cash')}
+                onClick={() => handleSetPaymentType('cash')}
               />
             </PaymentContainer>
+            {isPaymentTypeError && (
+              <PaymentError>
+                <span>Selecione uma forma de pagamento</span>
+              </PaymentError>
+            )}
           </CardForm>
         </ContainerForm>
       </FormProvider>

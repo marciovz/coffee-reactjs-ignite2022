@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const ContainerForm = styled.div`
   width: 40rem;
 
-  h2 {
+  & > h2 {
     font: ${({ theme }) => theme.fonts['baloo-700']};
     color: ${({ theme }) => theme.colors['base-subtitle']};
     font-size: 1.125rem;
@@ -28,13 +28,13 @@ export const CardForm = styled.div`
   background: ${({ theme }) => theme.colors['base-card']};
   border-radius: 0.375rem;
 
-  h3 {
+  & > h3 {
     font: ${({ theme }) => theme.fonts['roboto-400']};
     color: ${({ theme }) => theme.colors['base-subtitle']};
     font-size: 1rem;
   }
 
-  p {
+  & > p {
     font: ${({ theme }) => theme.fonts['roboto-400']};
     color: ${({ theme }) => theme.colors['base-text']};
     font-size: 0.875rem;
@@ -67,4 +67,10 @@ export const PaymentContainer = styled.div`
   margin-top: 2rem;
   display: flex;
   justify-content: space-between;
+`
+export const PaymentError = styled.div`
+  margin-top: 1rem;
+  font: ${({ theme }) => theme.fonts['roboto-400']};
+  color: ${({ theme }) => theme.colors['yellow-dark']};
+  font-size: 1rem;
 `
