@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { MapPinLine, CurrencyDollar } from 'phosphor-react'
+import { useForm, FormProvider } from 'react-hook-form'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { Input } from '../../components/Form/Input'
+import { AddressForm } from '../../components/Form/AddressForm'
 import { PaymentTypeButton } from '../../components/Form/PaymentTypeButton'
 import { CartOrderCard } from '../../components/CartOrderCard'
 
@@ -10,84 +13,93 @@ import {
   ContainerForm,
   CardForm,
   CardFormHeader,
-  Form,
-  LineForm,
   PaymentContainer,
 } from './styles'
 
-type IPaymentType = 'credit' | 'debit' | 'cash'
+type IPaymentType = 'credit' | 'debit' | 'cash' | 'none'
+
+const addressFormValidatorSchema = zod.object({
+  cep: zod.string().min(8, 'Informe o CEP!').max(8, 'CEP inválido!').length(8),
+  street: zod.string().min(1, 'Informe a Rua'),
+  number: zod.string().min(1, 'Informe o Número'),
+  complement: zod.string(),
+  district: zod.string().min(1, 'Informe o Bairro'),
+  city: zod.string().min(1, 'Informe a Cidade'),
+  uf: zod.string().min(1, 'Informe a UF'),
+})
+
+export type AddressFormData = zod.infer<typeof addressFormValidatorSchema>
 
 export function Checkout() {
-  const [paymentType, setPaymentType] = useState<IPaymentType>('credit')
+  const [paymentType, setPaymentType] = useState<IPaymentType>('none')
+
+  const dataForm = useForm<AddressFormData>({
+    resolver: zodResolver(addressFormValidatorSchema),
+  })
+
+  const { handleSubmit, formState } = dataForm
+
+  const { errors } = formState
+  console.log(errors)
+
+  function confirmOrder(data: AddressFormData) {
+    console.log(data)
+  }
 
   return (
     <Container>
-      <ContainerForm>
-        <h2>Complete seu pedido</h2>
+      <FormProvider {...dataForm}>
+        <ContainerForm>
+          <h2>Complete seu pedido</h2>
 
-        <CardForm>
-          <CardFormHeader type="MapPinLine">
-            <MapPinLine />
-            <div>
-              <h3>Endereço de Entrega</h3>
-              <p>Informe o endereço onde deseja receber seu pedido</p>
-            </div>
-          </CardFormHeader>
+          <CardForm>
+            <CardFormHeader type="MapPinLine">
+              <MapPinLine />
+              <div>
+                <h3>Endereço de Entrega</h3>
+                <p>Informe o endereço onde deseja receber seu pedido</p>
+              </div>
+            </CardFormHeader>
 
-          <Form>
-            <LineForm cols="13rem 1fr">
-              <Input name="cpf" placeholder="CPF" />
-            </LineForm>
-            <LineForm>
-              <Input name="street" placeholder="Rua" />
-            </LineForm>
-            <LineForm cols="13rem 1fr">
-              <Input name="number" placeholder="Número" />
-              <Input name="complement" placeholder="Complemento" opcional />
-            </LineForm>
-            <LineForm cols="13rem 1fr 4rem">
-              <Input name="neighborhood" placeholder="Bairro" />
-              <Input name="city" placeholder="Cidade" />
-              <Input name="uf" placeholder="UF" />
-            </LineForm>
-          </Form>
-        </CardForm>
+            <AddressForm />
+          </CardForm>
 
-        <CardForm>
-          <CardFormHeader type="CurrencyDollar">
-            <CurrencyDollar />
-            <div>
-              <h3>Pagamento</h3>
-              <p>
-                O pagamento é feito na entrega. Escolha a forma que deseja pagar
-              </p>
-            </div>
-          </CardFormHeader>
+          <CardForm>
+            <CardFormHeader type="CurrencyDollar">
+              <CurrencyDollar />
+              <div>
+                <h3>Pagamento</h3>
+                <p>
+                  O pagamento é feito na entrega. Escolha a forma que deseja
+                  pagar
+                </p>
+              </div>
+            </CardFormHeader>
 
-          <PaymentContainer>
-            <PaymentTypeButton
-              title="Cartão de Crédito"
-              type="credit"
-              isActive={paymentType === 'credit'}
-              onClick={() => setPaymentType('credit')}
-            />
-            <PaymentTypeButton
-              title="Cartão de Débito"
-              type="debit"
-              isActive={paymentType === 'debit'}
-              onClick={() => setPaymentType('debit')}
-            />
-            <PaymentTypeButton
-              title="Dinheiro"
-              type="cash"
-              isActive={paymentType === 'cash'}
-              onClick={() => setPaymentType('cash')}
-            />
-          </PaymentContainer>
-        </CardForm>
-      </ContainerForm>
-
-      <CartOrderCard />
+            <PaymentContainer>
+              <PaymentTypeButton
+                title="Cartão de Crédito"
+                type="credit"
+                isActive={paymentType === 'credit'}
+                onClick={() => setPaymentType('credit')}
+              />
+              <PaymentTypeButton
+                title="Cartão de Débito"
+                type="debit"
+                isActive={paymentType === 'debit'}
+                onClick={() => setPaymentType('debit')}
+              />
+              <PaymentTypeButton
+                title="Dinheiro"
+                type="cash"
+                isActive={paymentType === 'cash'}
+                onClick={() => setPaymentType('cash')}
+              />
+            </PaymentContainer>
+          </CardForm>
+        </ContainerForm>
+      </FormProvider>
+      <CartOrderCard submitForm={handleSubmit(confirmOrder)} />
     </Container>
   )
 }

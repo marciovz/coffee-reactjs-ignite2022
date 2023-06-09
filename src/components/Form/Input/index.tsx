@@ -3,14 +3,13 @@ import {
   ForwardRefRenderFunction,
   InputHTMLAttributes,
 } from 'react'
-import { FieldError } from 'react-hook-form'
 import { WarningCircle } from 'phosphor-react'
 
 import { Container, Error } from './styles'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
-  error?: FieldError | undefined
+  error?: { message: string }
   opcional?: boolean
 }
 
@@ -30,7 +29,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       {opcional && <p>Opcional</p>}
 
       {error && (
-        <Error title={error.message || ''}>
+        <Error title={error.message}>
           <WarningCircle size={20} color="#AB222E" weight="fill" />
         </Error>
       )}

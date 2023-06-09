@@ -28,7 +28,11 @@ interface CoffeeOrderCart {
   quantity: number
 }
 
-export function CartOrderCard() {
+interface CartOrderCardProps {
+  submitForm: () => void
+}
+
+export function CartOrderCard({ submitForm }: CartOrderCardProps) {
   const [coffeesOrder, setCoffeesOrder] = useState<CoffeeOrderCart[]>([])
 
   const navigate = useNavigate()
@@ -61,12 +65,12 @@ export function CartOrderCard() {
     setCoffeesOrder(FormattedCoffeeCart)
   }, [coffeesCart])
 
-  function handleConfirm() {
+  function handleConfirmOrder() {
     if (isOrderCartEmpty) {
       navigate('/')
       return
     }
-    navigate('/success')
+    submitForm()
   }
 
   function removeCart(id: string) {
@@ -116,7 +120,7 @@ export function CartOrderCard() {
           </>
         )}
 
-        <ButtonConfirm onClick={handleConfirm}>
+        <ButtonConfirm onClick={handleConfirmOrder}>
           {isOrderCartEmpty ? 'Selecionar pedidos' : 'Confirmar Pedido'}
         </ButtonConfirm>
       </Cart>

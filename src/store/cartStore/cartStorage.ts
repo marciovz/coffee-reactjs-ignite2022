@@ -11,3 +11,7 @@ export function GetCoffeesCart() {
 export function SaveCoffeeCart(coffeesCart: CoffeeCart[]) {
   localStorage.setItem(CART_COLLECTION, JSON.stringify(coffeesCart))
 }
+
+export function RemoveCoffeeCart() {
+  localStorage.removeItem(CART_COLLECTION)
+}
