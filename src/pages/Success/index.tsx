@@ -1,10 +1,21 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { Navigate } from 'react-router-dom'
 
+import { useOrder } from '../../store/hooks'
 import imgDelivery from '../../assets/img-delivery.svg'
 
 import { Container, CardSuccess, CardInfo, Info } from './styles'
 
 export function Success() {
+  const { order } = useOrder()
+
+  if (order === null) {
+    return <Navigate to="/" />
+  }
+
+  const { paymentType } = order
+  const { street, number, district, city, uf } = order.address
+
   return (
     <Container>
       <CardSuccess>
@@ -14,28 +25,31 @@ export function Success() {
         <CardInfo>
           <Info statusColor={'purple'}>
             <MapPin weight="fill" />
-            <p>
-              Entrega em <strong>Rua João Daniel Martinelli, 102 </strong>
-              <p>Farrapos - Porto Alegre, RS</p>
-            </p>
+            <div>
+              <p>
+                Entrega em
+                <strong>{` ${street}, ${number}`}</strong>
+              </p>
+              <p>{`${district} - ${city}, ${uf}`}</p>
+            </div>
           </Info>
           <Info statusColor="yellow">
             <Timer weight="fill" />
-            <p>
-              Previsão de entrega
+            <div>
+              <p>Previsão de entrega</p>
               <p>
                 <strong>20 min a 30 min</strong>
               </p>
-            </p>
+            </div>
           </Info>
           <Info statusColor="yellowDark">
             <CurrencyDollar weight="fill" />
-            <p>
-              Pagamento na entrega
+            <div>
+              <p>Pagamento na entrega</p>
               <p>
-                <strong>Cartão de crédito</strong>
+                <strong>Pagamento no {paymentType}</strong>
               </p>
-            </p>
+            </div>
           </Info>
         </CardInfo>
       </CardSuccess>

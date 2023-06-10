@@ -69,7 +69,7 @@ export const Info = styled.div<StatusProps>`
       theme.colors[STATUS_COLORS[statusColor]]};
   }
 
-  & p {
+  & > div > p {
     font: ${({ theme }) => theme.fonts['roboto-400']};
     color: ${({ theme }) => theme.colors['base-text']};
     font-size: 1rem;
