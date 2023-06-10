@@ -6,6 +6,7 @@ import {
   incrementQuantity,
   decrementQuantity,
   removeCoffee,
+  clearCart,
 } from './cartActions'
 
 interface Coffee {
@@ -29,6 +30,7 @@ interface CartContextData {
   incrementQuantityCoffee: (id: string) => void
   decrementQuantityCoffee: (id: string) => void
   removeCoffeeCart: (id: string) => void
+  clearCoffeeCart: () => void
 }
 
 interface CartProviderProps {
@@ -62,6 +64,10 @@ export function CartProvider({ children }: CartProviderProps) {
     dispatch(removeCoffee(id))
   }
 
+  function clearCoffeeCart() {
+    dispatch(clearCart())
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -71,6 +77,7 @@ export function CartProvider({ children }: CartProviderProps) {
         incrementQuantityCoffee,
         decrementQuantityCoffee,
         removeCoffeeCart,
+        clearCoffeeCart,
       }}
     >
       {children}

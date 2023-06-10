@@ -2,7 +2,7 @@ import { produce } from 'immer'
 
 import { CartActionTypes } from './cartActions'
 import { CoffeeCart } from './cartContext'
-import { GetCoffeesCart, SaveCoffeeCart } from './cartStorage'
+import { GetCoffeesCart, SaveCoffeeCart, RemoveCoffeeCart } from './cartStorage'
 
 interface CartState {
   coffeesCart: CoffeeCart[]
@@ -88,6 +88,13 @@ export function CartReducer(state: CartState, action: any) {
         }
 
         SaveCoffeeCart(draft.coffeesCart)
+      })
+    }
+
+    case CartActionTypes.CLEAR_CART: {
+      return produce(state, (draft) => {
+        draft.coffeesCart = []
+        RemoveCoffeeCart()
       })
     }
 

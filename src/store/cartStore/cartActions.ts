@@ -11,6 +11,7 @@ export const CartActionTypes = {
   INCREMENT_QUANTITY: 'INCREMENT_QUANTITY',
   DECREMENT_QUANTITY: 'DECREMENT_QUANTITY',
   REMOVE_COFFEE: 'REMOVE_COFFEE',
+  CLEAR_CART: 'CLEAR_CART',
 }
 
 export function addCoffee({ coffee, quantity }: CoffeeCart) {
@@ -57,5 +58,12 @@ export function removeCoffee(id: string) {
     payload: {
       id,
     },
+  }
+}
+
+export function clearCart() {
+  return {
+    type: CartActionTypes.CLEAR_CART,
+    payload: {},
   }
 }
