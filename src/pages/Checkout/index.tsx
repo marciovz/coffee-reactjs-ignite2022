@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { MapPinLine, CurrencyDollar } from 'phosphor-react'
@@ -7,8 +8,9 @@ import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 import { AddressForm } from '../../components/Form/AddressForm'
 import { PaymentTypeButton } from '../../components/Form/PaymentTypeButton'
 import { CartOrderCard } from '../../components/CartOrderCard'
+
 import { api } from '../../services/api'
-import { useCart } from '../../store/hooks'
+import { useCart, useOrder } from '../../store/hooks'
 
 import {
   Container,
@@ -37,7 +39,9 @@ export function Checkout() {
   const [paymentType, setPaymentType] = useState<IPaymentType>('none')
   const [isPaymentTypeError, setIsPaymentTypeError] = useState(false)
 
-  const { coffeesCart } = useCart()
+  const { coffeesCart, clearCoffeeCart } = useCart()
+  const { saveOrder } = useOrder()
+  const navigate = useNavigate()
 
   const dataForm = useForm<AddressFormData>({
     resolver: zodResolver(addressFormValidatorSchema),
@@ -51,28 +55,38 @@ export function Checkout() {
   }
 
   async function confirmOrder(data: AddressFormData) {
+    const tax = 3.5
+
     if (paymentType === 'none') {
       setIsPaymentTypeError(true)
       return
     }
 
-    const tax = 3.5
-
-    await api.post('/coffeeCart', {
+    const order = {
       date: new Date(),
+      address: data,
       order: coffeesCart.map((orderItem) => ({
         id: orderItem.coffee.id,
         title: orderItem.coffee.title,
         price: orderItem.coffee.price,
         quantity: orderItem.quantity,
       })),
-      address: data,
+      paymentType,
       tax,
       total:
         coffeesCart.reduce((acc, cart) => {
           return (acc += cart.coffee.price * cart.quantity)
         }, 0) + tax,
-    })
+    }
+
+    try {
+      await api.post('/coffeeCart', order)
+      saveOrder(order)
+      clearCoffeeCart()
+      navigate('/success')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
