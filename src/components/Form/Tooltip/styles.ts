@@ -4,8 +4,8 @@ export const Container = styled.div`
   position: relative;
 
   span {
-    width: 10rem;
-    padding: 8px;
+    width: max-content;
+    padding: 0.5rem 1rem;
 
     position: absolute;
     bottom: calc(100% + 0.75rem);
@@ -13,8 +13,9 @@ export const Container = styled.div`
     transform: translateX(-50%);
 
     font: ${({ theme }) => theme.fonts['roboto-400']};
+    color: ${({ theme }) => theme.colors.white};
     font-size: 0.87rem;
-    color: ${({ theme }) => theme.colors['base-label']};
+    text-align: center;
 
     opacity: 0;
     visibility: hidden;

@@ -38,7 +38,7 @@ export const Button = styled.button<PaymentButtonProps>`
       `}
   }
 
-  > svg {
+  & > svg {
     width: 1rem;
     height: 1rem;
     color: ${({ theme }) => theme.colors.purple};

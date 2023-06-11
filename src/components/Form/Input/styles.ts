@@ -14,32 +14,28 @@ export const Container = styled.div<ContainerProps>`
   width: '100%';
 
   background: ${({ theme }) => theme.colors['base-input']};
-  border: 1px solid ${({ theme }) => theme.colors['base-button']};
+  border: 2px solid ${({ theme }) => theme.colors['base-button']};
   border-radius: 4px;
 
   display: flex;
   align-items: center;
 
-  > svg {
-    margin-right: 1rem;
-  }
+  ${(props) =>
+    props.isFilled &&
+    css`
+      border-color: ${({ theme }) => theme.colors['yellow-dark']};
+    `}
 
   ${(props) =>
     props.isErrored &&
     css`
-      border-color: ${({ theme }) => theme.colors.yellow};
+      border-color: ${({ theme }) => theme.colors['red-warning']};
     `}
 
   ${(props) =>
     props.isFocused &&
     css`
       border-color: ${({ theme }) => theme.colors['yellow-dark']};
-    `}
-
-  ${(props) =>
-    props.isFilled &&
-    css`
-      color: ${({ theme }) => theme.colors['base-button']};
     `}
 
   input {
@@ -59,7 +55,7 @@ export const Container = styled.div<ContainerProps>`
     }
   }
 
-  > p {
+  & > p {
     padding-left: 0.3rem;
     font: ${({ theme }) => theme.fonts['roboto-400']};
     color: ${({ theme }) => theme.colors['base-label']};
@@ -75,16 +71,10 @@ export const Error = styled(Tooltip)`
   position: absolute;
   right: 10px;
 
-  > svg {
+  & > svg {
     margin: 0;
-  }
-
-  span {
-    background: ${({ theme }) => theme.colors['yellow-dark']};
-    color: #fff;
-
-    &::before {
-      border-color: ${({ theme }) => theme.colors['yellow-dark']} transparent;
-    }
+    width: 1.25rem;
+    height: 1.25rem;
+    color: ${({ theme }) => theme.colors['red-warning']};
   }
 `

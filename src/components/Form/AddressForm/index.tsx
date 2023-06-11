@@ -1,54 +1,27 @@
-import { useFormContext } from 'react-hook-form'
-
 import { Input } from '../Input'
 
 import { Form, LineForm } from './styles'
 
-interface ErrorsType {
-  errors: {
-    [key: string]: {
-      message: string
-    }
-  }
-}
-
 export function AddressForm() {
-  const { register, formState } = useFormContext()
-  const { errors } = formState as unknown as ErrorsType
-
   return (
     <Form>
       <LineForm cols="13rem 1fr">
-        <Input placeholder="CEP" {...register('cep')} error={errors.cep} />
+        <Input name="cep" placeholder="CEP" />
       </LineForm>
+
       <LineForm>
-        <Input
-          placeholder="Rua"
-          {...register('street')}
-          error={errors.street}
-        />
+        <Input name="street" placeholder="Rua" />
       </LineForm>
+
       <LineForm cols="13rem 1fr">
-        <Input
-          placeholder="Número"
-          {...register('number')}
-          error={errors.number}
-        />
-        <Input
-          placeholder="Complemento"
-          {...register('complement')}
-          error={errors.complement}
-          opcional
-        />
+        <Input name="number" placeholder="Número" />
+        <Input name="complement" placeholder="Complemento" opcional />
       </LineForm>
+
       <LineForm cols="13rem 1fr 4rem">
-        <Input
-          placeholder="Bairro"
-          {...register('district')}
-          error={errors.district}
-        />
-        <Input placeholder="Cidade" {...register('city')} error={errors.city} />
-        <Input placeholder="UF" {...register('uf')} error={errors.uf} />
+        <Input name="district" placeholder="Bairro" />
+        <Input name="city" placeholder="Cidade" />
+        <Input name="uf" placeholder="UF" />
       </LineForm>
     </Form>
   )
