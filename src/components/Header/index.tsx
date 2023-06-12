@@ -1,15 +1,15 @@
-import { MapPin, ShoppingCart } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
+import { MapPin, ShoppingCart } from 'phosphor-react'
 
 import { useCart } from '../../store/hooks'
 import logoCoffeeDelivery from '../../assets/logo-coffee-delivery.svg'
 
-import { HeaderContainer, ButtonCart, RegionLabel } from './styles'
+import { Container, ButtonCart, RegionLabel } from './styles'
 
 export function Header() {
   const { coffeesCart } = useCart()
   return (
-    <HeaderContainer>
+    <Container>
       <NavLink to="/">
         <img src={logoCoffeeDelivery} alt="" />
       </NavLink>
@@ -27,6 +27,6 @@ export function Header() {
           </ButtonCart>
         </NavLink>
       </nav>
-    </HeaderContainer>
+    </Container>
   )
 }

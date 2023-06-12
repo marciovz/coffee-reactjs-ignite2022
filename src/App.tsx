@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'styled-components'
+import { BrowserRouter } from 'react-router-dom'
 
 import { Router } from './Router'
+import { ProvidersStore } from './store/providers'
 
 import { defaultTheme } from './styles/themes/default'
 import { GlobalStyle } from './styles/global'
-import { BrowserRouter } from 'react-router-dom'
-import { ProvidersStore } from './store/providers'
 
 function App() {
   return (

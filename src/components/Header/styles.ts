@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.header`
+export const Container = styled.header`
   width: 70rem;
   margin: 0 auto;
   padding: 2rem 0;
@@ -8,7 +8,7 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
 
-  > a {
+  & > a {
     line-height: 0;
   }
 
