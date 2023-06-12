@@ -59,7 +59,7 @@ interface StatusProps {
   statusColor: keyof typeof STATUS_COLORS
 }
 
-export const Item = styled.span<StatusProps>`
+export const Item = styled.div<StatusProps>`
   display: flex;
   gap: 0.75rem;
   align-items: center;

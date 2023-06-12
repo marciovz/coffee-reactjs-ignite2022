@@ -7,11 +7,8 @@ interface IAddCartButton {
 }
 
 export function AddCartButton({ onClick }: IAddCartButton) {
-  const handleClick = () => {
-    onClick()
-  }
   return (
-    <ButtonContainer onClick={handleClick}>
+    <ButtonContainer onClick={onClick}>
       <ShoppingCartSimple size={22} weight="fill" />
     </ButtonContainer>
   )
