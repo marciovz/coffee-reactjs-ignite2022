@@ -6,12 +6,12 @@ export const Container = styled.div`
   padding-bottom: 1.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors['base-button']};
 
-  > img {
+  & > img {
     width: 4rem;
     height: 4rem;
   }
 
-  > p {
+  & > p {
     min-width: 4.7rem;
     text-align: end;
     font: ${({ theme }) => theme.fonts['roboto-700']};
@@ -20,7 +20,7 @@ export const Container = styled.div`
   }
 `
 export const BoxContent = styled.div`
-  p {
+  & > p {
     font: ${({ theme }) => theme.fonts['roboto-400']};
     color: ${({ theme }) => theme.colors['base-text']};
     font-size: 1rem;
@@ -56,7 +56,7 @@ export const RemoveItemButton = styled.button`
     background: ${({ theme }) => theme.colors['base-hover']};
   }
 
-  svg {
+  & > svg {
     width: 1rem;
     height: 1rem;
     color: ${({ theme }) => theme.colors.purple};

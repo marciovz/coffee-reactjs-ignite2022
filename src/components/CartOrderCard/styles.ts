@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width: 28rem;
 
-  h2 {
+  & > h2 {
     font: ${({ theme }) => theme.fonts['baloo-700']};
     color: ${({ theme }) => theme.colors['base-subtitle']};
     font-size: 1.125rem;
@@ -26,7 +26,7 @@ export const Description = styled.div`
   flex-direction: column;
   gap: 0.75rem;
 
-  div {
+  & > div {
     display: flex;
     justify-content: space-between;
 

@@ -45,7 +45,7 @@ export const CardFormHeader = styled.div<ITypeIconProps>`
   display: flex;
   gap: 0.5rem;
 
-  svg {
+  & > svg {
     width: 1.375rem;
     height: 1.375rem;
 
@@ -68,9 +68,10 @@ export const PaymentContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `
+
 export const PaymentError = styled.div`
   margin-top: 1rem;
   font: ${({ theme }) => theme.fonts['roboto-400']};
-  color: ${({ theme }) => theme.colors['yellow-dark']};
+  color: ${({ theme }) => theme.colors['red-warning']};
   font-size: 1rem;
 `

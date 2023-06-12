@@ -1,5 +1,5 @@
-import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { Navigate } from 'react-router-dom'
+import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 
 import { useOrder } from '../../store/hooks'
 import imgDelivery from '../../assets/img-delivery.svg'
@@ -15,6 +15,12 @@ export function Success() {
 
   const { paymentType } = order
   const { street, number, district, city, uf } = order.address
+
+  const paymentTypeTranslation = {
+    cash: 'dinheiro',
+    credit: 'crédito',
+    debit: 'débito',
+  }
 
   return (
     <Container>
@@ -47,7 +53,9 @@ export function Success() {
             <div>
               <p>Pagamento na entrega</p>
               <p>
-                <strong>Pagamento no {paymentType}</strong>
+                <strong>
+                  Pagamento no {paymentTypeTranslation[paymentType]}
+                </strong>
               </p>
             </div>
           </Info>

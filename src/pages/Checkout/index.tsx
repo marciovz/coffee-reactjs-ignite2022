@@ -27,7 +27,7 @@ const addressFormValidatorSchema = zod.object({
   cep: zod.string().min(8, 'Informe o CEP!').max(8, 'CEP inválido!').length(8),
   street: zod.string().min(1, 'Informe a Rua'),
   number: zod.string().min(1, 'Informe o Número'),
-  complement: zod.string(),
+  complement: zod.string().optional(),
   district: zod.string().min(1, 'Informe o Bairro'),
   city: zod.string().min(1, 'Informe a Cidade'),
   uf: zod.string().min(1, 'Informe a UF'),
@@ -55,15 +55,12 @@ export function Checkout() {
   }
 
   async function confirmOrder(data: AddressFormData) {
-    const tax = 3.5
-
     if (paymentType === 'none') {
       setIsPaymentTypeError(true)
       return
     }
 
     const order = {
-      date: new Date(),
       address: data,
       order: coffeesCart.map((orderItem) => ({
         id: orderItem.coffee.id,
@@ -72,11 +69,6 @@ export function Checkout() {
         quantity: orderItem.quantity,
       })),
       paymentType,
-      tax,
-      total:
-        coffeesCart.reduce((acc, cart) => {
-          return (acc += cart.coffee.price * cart.quantity)
-        }, 0) + tax,
     }
 
     try {
@@ -147,6 +139,7 @@ export function Checkout() {
           </CardForm>
         </ContainerForm>
       </FormProvider>
+
       <CartOrderCard submitForm={handleSubmit(confirmOrder)} />
     </Container>
   )
