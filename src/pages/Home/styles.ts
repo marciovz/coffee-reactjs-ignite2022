@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-export const CoffeeListContainer = styled.div`
+export const Container = styled.div`
   width: 70rem;
   margin: 2rem auto 10rem;
 
-  h2 {
+  & > h2 {
     font: ${({ theme }) => theme.fonts['baloo-800']};
     font-size: 2rem;
     line-height: 2.3rem;

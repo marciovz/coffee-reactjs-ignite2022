@@ -10,7 +10,7 @@ export const ButtonContainer = styled.div`
   background: ${({ theme }) => theme.colors['base-button']};
   border-radius: 6px;
 
-  span {
+  & > span {
     min-width: 1.25rem;
 
     display: flex;
@@ -22,7 +22,7 @@ export const ButtonContainer = styled.div`
     line-height: 1.375rem;
   }
 
-  button {
+  & > button {
     border: 0;
     line-height: 0;
     background: transparent;

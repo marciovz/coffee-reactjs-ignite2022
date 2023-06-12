@@ -41,7 +41,7 @@ export const ItemColumns = styled.div`
   display: flex;
   gap: 2.5rem;
 
-  > div {
+  & > div {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -63,7 +63,8 @@ export const Item = styled.span<StatusProps>`
   display: flex;
   gap: 0.75rem;
   align-items: center;
-  svg {
+
+  & > svg {
     padding: 0.5rem;
     border-radius: 50%;
     color: ${({ theme }) => theme.colors.background};
@@ -71,7 +72,7 @@ export const Item = styled.span<StatusProps>`
       theme.colors[STATUS_COLORS[statusColor]]};
   }
 
-  p {
+  & > p {
     line-height: 1.3rem;
   }
 `

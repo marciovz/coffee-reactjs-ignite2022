@@ -11,12 +11,12 @@ export const CardContainer = styled.div`
   background: ${({ theme }) => theme.colors['base-card']};
   border-radius: 6px 2.25rem 6px 2.25rem;
 
-  > img {
+  & > img {
     margin-top: -2.5rem;
     width: 7.5rem;
   }
 
-  h3 {
+  & > h3 {
     margin-top: 1rem;
     font: ${({ theme }) => theme.fonts['baloo-700']};
     font-size: 1.25rem;
@@ -24,7 +24,7 @@ export const CardContainer = styled.div`
     color: ${({ theme }) => theme.colors['base-subtitle']};
   }
 
-  > p {
+  & > p {
     margin-top: 0.5rem;
     font: ${({ theme }) => theme.fonts['roboto-400']};
     font-size: 0.875rem;
@@ -39,7 +39,7 @@ export const TagContainer = styled.div`
   display: flex;
   gap: 0.25rem;
 
-  span {
+  & > span {
     padding: 0.25rem 0.5rem;
     font: ${({ theme }) => theme.fonts['roboto-700']};
     font-size: 0.625rem;
@@ -60,7 +60,7 @@ export const BuyContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  p {
+  & > p {
     font: ${({ theme }) => theme.fonts['baloo-800']};
     font-size: 1.5rem;
     font-weight: 800;
@@ -75,7 +75,7 @@ export const BuyContainer = styled.div`
     }
   }
 
-  > div {
+  & > div {
     display: flex;
     flex-direction: row;
     align-items: center;

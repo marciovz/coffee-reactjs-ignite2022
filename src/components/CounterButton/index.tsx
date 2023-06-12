@@ -9,8 +9,8 @@ interface CounterButtonProps {
   initialValue?: number
   maxValue?: number
   minValue?: number
-  onClickIncrement: (newValue: number | null) => void
-  onClickDecrement: (newValue: number | null) => void
+  onClickIncrement: (newValue: number) => void
+  onClickDecrement: (newValue: number) => void
 }
 
 export function CounterButton({
@@ -37,7 +37,7 @@ export function CounterButton({
         setValueDisplay(newState)
         onClickIncrement(newState)
       } else {
-        onClickIncrement(null)
+        onClickIncrement(0)
       }
     }
   }
@@ -49,7 +49,7 @@ export function CounterButton({
         setValueDisplay(newState)
         onClickDecrement(newState)
       } else {
-        onClickDecrement(null)
+        onClickDecrement(0)
       }
     }
   }

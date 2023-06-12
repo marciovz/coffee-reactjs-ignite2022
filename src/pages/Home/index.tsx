@@ -2,7 +2,7 @@ import { BannerHome } from '../../components/BannerHome'
 import { CoffeeCard } from '../../components/CoffeeCard'
 import { useCoffees, useCart } from '../../store/hooks'
 
-import { CoffeeListContainer, CoffeeList } from './styles'
+import { Container, CoffeeList } from './styles'
 
 export function Home() {
   const { coffeeList } = useCoffees()
@@ -11,7 +11,7 @@ export function Home() {
   return (
     <>
       <BannerHome />
-      <CoffeeListContainer>
+      <Container>
         <h2>Nossos cafés</h2>
         <CoffeeList>
           {coffeeList.map((item) => (
@@ -22,7 +22,7 @@ export function Home() {
             />
           ))}
         </CoffeeList>
-      </CoffeeListContainer>
+      </Container>
     </>
   )
 }
