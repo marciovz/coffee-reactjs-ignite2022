@@ -30,11 +30,11 @@ export function CoffeesProvider({ children }: CoffeesProviderProps) {
   const [coffeeList, setCoffeeList] = useState<Coffee[]>([])
 
   useEffect(() => {
-    async function loadCoffees() {
+    async function loadCoffeesApi() {
       const requestData = await api.get('/coffeeList')
       setCoffeeList(requestData.data)
     }
-    loadCoffees()
+    loadCoffeesApi()
   }, [])
 
   return (

@@ -2,14 +2,14 @@ import { produce } from 'immer'
 
 import { CartActionTypes } from './cartActions'
 import { CoffeeCart } from './cartContext'
-import { GetCoffeesCart, SaveCoffeeCart, RemoveCoffeeCart } from './cartStorage'
+import { getCoffeesCart, saveCoffeeCart, removeCoffeeCart } from './cartStorage'
 
 interface CartState {
   coffeesCart: CoffeeCart[]
 }
 
 export const INITIAL_STATE = {
-  coffeesCart: GetCoffeesCart(),
+  coffeesCart: getCoffeesCart(),
 }
 
 export function CartReducer(state: CartState, action: any) {
@@ -28,8 +28,7 @@ export function CartReducer(state: CartState, action: any) {
             quantity: action.payload.quantity,
           })
         }
-
-        SaveCoffeeCart(draft.coffeesCart)
+        saveCoffeeCart(draft.coffeesCart)
       })
     }
 
@@ -42,8 +41,7 @@ export function CartReducer(state: CartState, action: any) {
         if (index >= 0) {
           draft.coffeesCart[index].quantity += action.payload.quantity
         }
-
-        SaveCoffeeCart(draft.coffeesCart)
+        saveCoffeeCart(draft.coffeesCart)
       })
     }
 
@@ -54,11 +52,9 @@ export function CartReducer(state: CartState, action: any) {
         )
 
         if (index >= 0) {
-          draft.coffeesCart[index].quantity =
-            draft.coffeesCart[index].quantity + 1
+          draft.coffeesCart[index].quantity += 1
         }
-
-        SaveCoffeeCart(draft.coffeesCart)
+        saveCoffeeCart(draft.coffeesCart)
       })
     }
 
@@ -69,11 +65,9 @@ export function CartReducer(state: CartState, action: any) {
         )
 
         if (index >= 0) {
-          draft.coffeesCart[index].quantity =
-            draft.coffeesCart[index].quantity - 1
+          draft.coffeesCart[index].quantity -= 1
         }
-
-        SaveCoffeeCart(draft.coffeesCart)
+        saveCoffeeCart(draft.coffeesCart)
       })
     }
 
@@ -86,15 +80,14 @@ export function CartReducer(state: CartState, action: any) {
         if (index >= 0) {
           draft.coffeesCart.splice(index, 1)
         }
-
-        SaveCoffeeCart(draft.coffeesCart)
+        saveCoffeeCart(draft.coffeesCart)
       })
     }
 
     case CartActionTypes.CLEAR_CART: {
       return produce(state, (draft) => {
         draft.coffeesCart = []
-        RemoveCoffeeCart()
+        removeCoffeeCart()
       })
     }
 

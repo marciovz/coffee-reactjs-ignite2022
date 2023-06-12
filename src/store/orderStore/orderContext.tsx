@@ -3,7 +3,6 @@ import { ReactNode, createContext, useState, useContext } from 'react'
 import { getOrderStorage, saveOrderStorage } from './orderStorage'
 
 export interface OrderProps {
-  date: Date
   address: {
     street: string
     number: string
@@ -18,8 +17,6 @@ export interface OrderProps {
     quantity: number
   }[]
   paymentType: 'credit' | 'debit' | 'cash'
-  tax: number
-  total: number
 }
 
 interface OrderContextProps {
